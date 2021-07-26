@@ -1,7 +1,22 @@
 import { getProducts } from "./database.js"
 
 const products = getProducts()
-console.log(products)
+
+document.addEventListener(
+    "click",
+    (clickEvent) => {
+        const itemClicked = clickEvent.target
+        if (itemClicked.id.startsWith("product")) {
+            const [,productId] = itemClicked.id.split("--")
+
+            for (const product of products) {
+                if (product.id === parseInt(productId)) {
+                    window.alert(`${product.name} services ${product.city}`)
+                }
+            }
+        }
+    }
+)
 
 export const Products = () => {
     let html = "<ul>"
